@@ -2,11 +2,13 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Homepage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
+import Header from "./components/header/header.component";
 import "./App.css";
 
 function App() {
   return (
     <div>
+      <Header />
       {/* // Switch: the moment a route is found, it will only render that route */}
       <Switch>
         {/* // without exact, as long as the path matches then the component will
