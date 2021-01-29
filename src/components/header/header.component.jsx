@@ -1,8 +1,9 @@
 import React from "react";
-import "./header.styles.scss";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux"; // HOC component
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
+import "./header.styles.scss";
 
 const Header = ({ currentUser }) => (
   <div className="header">
@@ -31,4 +32,10 @@ const Header = ({ currentUser }) => (
   </div>
 );
 
-export default Header;
+// Access the state using the root reducer
+// the state we pass in is the root reducer
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Header);
