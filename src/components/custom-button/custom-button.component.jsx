@@ -1,10 +1,15 @@
 import React from "react";
 import "./custom-button.styles.scss";
 
-const CustomButton = ({ children, isGoogleSignIn, ...otherProps }) => (
-  // If Google is signed in use the google-sign-in class, always use the custom-button class
+const CustomButton = ({
+  children,
+  isGoogleSignIn,
+  inverted,
+  ...otherProps
+}) => (
+  // If inverted is true then add the inverted class
   <button
-    className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
+    className={`${inverted ? "inverted" : ""} custom-button`}
     {...otherProps}
   >
     {children}
