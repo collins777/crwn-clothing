@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux"; // HOC component
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import "./header.styles.scss";
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -28,14 +30,21 @@ const Header = ({ currentUser }) => (
           SIGN IN
         </Link>
       )}
+      <CartIcon />
     </div>
+    {/* Conditionally show || hide this component using a cart reducer */}
+    {/* If hidden = true, remove dropdown. If hidden = false, display dropdown*/}
+    {hidden ? null : <CartDropdown />}
   </div>
 );
 
 // Access the state using the root reducer
 // the state we pass in is the root reducer
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+
+// destructer nested values syntax
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
 });
 
 export default connect(mapStateToProps)(Header);
