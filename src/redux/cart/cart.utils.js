@@ -17,3 +17,20 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   // if cart item not found, return new array with previous existing items and new object
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+// Remove cart items using arrows within checkout page
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  const existingCartItem = cartItems.find(
+    cartItem => cartItem.id === cartItemToRemove.id
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+  }
+
+  return cartItems.map(cartItem =>
+    cartItem.id === cartItemToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
